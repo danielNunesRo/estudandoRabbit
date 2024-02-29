@@ -1,0 +1,33 @@
+package com.danielnunesro.ensino.services;
+
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.danielnunesro.ensino.dtos.ClienteDTO;
+import com.danielnunesro.ensino.mapper.ClienteMapper;
+import com.danielnunesro.ensino.repositories.ClienteRepository;
+
+@Service
+public class ClienteService {
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	
+	public Optional<ClienteDTO> findById(Long id) {
+		var entity = clienteRepository.findById(id);
+		if(entity.isEmpty()) {
+			throw new NoSuchElementException("Cliente não encontrado para o ID: " + id);
+		}
+		
+		var cliente = entity.get();
+		ClienteDTO clienteDTO = ClienteMapper.INSTANCE.converteEntityToDto(cliente);
+		
+		return Optional.of(clienteDTO);
+	}
+	
+	
+}

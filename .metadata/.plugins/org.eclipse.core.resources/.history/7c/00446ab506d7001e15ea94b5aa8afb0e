@@ -1,0 +1,5 @@
+package com.danielnunesro.users.listener;
+
+public class UserListener {
+
+}

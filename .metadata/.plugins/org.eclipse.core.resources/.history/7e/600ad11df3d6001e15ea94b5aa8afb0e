@@ -1,0 +1,46 @@
+package com.danielnunesro.ensino.unittests.mapper.cliente;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.danielnunesro.ensino.dtos.ClienteDTO;
+import com.danielnunesro.ensino.entities.Cliente;
+import com.danielnunesro.ensino.mapper.ClienteMapper;
+
+@RunWith(MockitoJUnitRunner.class)
+public class ClienteMapperTest {
+	 	
+	
+		@InjectMocks
+	    private ClienteMapper clienteMapper;
+
+	    @Test
+	    public void testConvertDtoToCliente() {
+	        ClienteDTO clienteDTO = new ClienteDTO("John Doe", "123456789", 30);
+
+	        Cliente cliente = clienteMapper.convertDtoToAluno(clienteDTO);
+
+	        assertEquals(clienteDTO.getName(), cliente.getName());
+	        assertEquals(clienteDTO.getCpf(), cliente.getCpf());
+	        assertEquals(clienteDTO.getAge(), cliente.getAge());
+	    }
+
+	    @Test
+	    public void testConvertClienteToDto() {
+	        Cliente cliente = new Cliente("Jane Doe", "987654321", 25);
+
+	        // Converta o Cliente para ClienteDTO usando o mapper
+	        ClienteDTO clienteDTO = clienteMapper.converteEntityToDto(cliente);
+
+	        // Verifique se os campos foram mapeados corretamente
+	        assertEquals(cliente.getName(), clienteDTO.getName());
+	        assertEquals(cliente.getCpf(), clienteDTO.getCpf());
+	        assertEquals(cliente.getAge(), clienteDTO.getAge());
+	    }
+	
+	
+}

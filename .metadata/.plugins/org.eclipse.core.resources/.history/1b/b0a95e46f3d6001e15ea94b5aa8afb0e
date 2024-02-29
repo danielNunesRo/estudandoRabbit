@@ -1,0 +1,5 @@
+package com.danielnunesro.ensino.repositories;
+
+public class ClienteRepository {
+
+}

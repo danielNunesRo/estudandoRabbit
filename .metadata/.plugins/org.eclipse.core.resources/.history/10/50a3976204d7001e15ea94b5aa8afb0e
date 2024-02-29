@@ -1,0 +1,41 @@
+package com.danielnunesro.ensino.config;
+
+import org.springframework.amqp.core.ExchangeBuilder;
+import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.QueueBuilder;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class RabbitMQConfiguration {
+	
+	@Value("${rabbitmq.cliente.exchange}")
+	private String exchange;
+	
+	@Bean
+	public Queue criarFilaClienteToUsers() {
+		return QueueBuilder.durable("ClienteToUsers").build();
+	}
+	
+	@Bean
+	public RabbitAdmin criarRabbitAdmin(ConnectionFactory connectionFactory) {
+		return new RabbitAdmin(connectionFactory);
+	}
+	
+	@Bean
+	public ApplicationListener<ApplicationReadyEvent> inicializarAdmin(RabbitAdmin rabbitAdmin) {
+		return event -> rabbitAdmin.initialize();
+	}
+	
+	@Bean
+	public FanoutExchange criarFanoutExchangeCliente() {
+		return ExchangeBuilder.fanoutExchange(exchange).build();
+	}
+	
+}

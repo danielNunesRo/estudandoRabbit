@@ -1,0 +1,5 @@
+package com.danielnunesro.ensino.entities;
+
+public class Cliente {
+
+}

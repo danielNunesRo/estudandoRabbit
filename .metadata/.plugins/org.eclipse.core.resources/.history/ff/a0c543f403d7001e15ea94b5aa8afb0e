@@ -1,0 +1,12 @@
+package com.danielnunesro.ensino.config;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class RabbitMQConfiguration {
+	
+	@Value("${rabbitmq.cliente.exachange}")
+	private String exchange;
+	
+}

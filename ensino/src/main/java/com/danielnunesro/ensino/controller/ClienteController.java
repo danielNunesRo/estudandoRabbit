@@ -1,0 +1,39 @@
+package com.danielnunesro.ensino.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.danielnunesro.ensino.dtos.ClienteDTO;
+import com.danielnunesro.ensino.services.ClienteService;
+
+@RestController
+@RequestMapping("/clientes")
+public class ClienteController {
+
+	@Autowired
+	private ClienteService clienteService;
+	
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Optional<ClienteDTO>> findById(@PathVariable Long id) {
+		Optional<ClienteDTO> clienteDTO = clienteService.findById(id);
+		return ResponseEntity.ok(clienteDTO);
+	}
+	
+	@PostMapping
+	public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO clienteDTO) {
+		clienteService.create(clienteDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).body(clienteDTO);
+		
+	}
+	
+}

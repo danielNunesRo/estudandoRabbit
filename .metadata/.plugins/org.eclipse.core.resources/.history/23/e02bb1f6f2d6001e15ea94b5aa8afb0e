@@ -1,0 +1,5 @@
+package com.danielnunesro.ensino.unittests.mapper.cliente;
+
+public class ClienteMapperTest {
+
+}

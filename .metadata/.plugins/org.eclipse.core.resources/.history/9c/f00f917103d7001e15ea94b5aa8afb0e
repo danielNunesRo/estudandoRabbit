@@ -1,0 +1,5 @@
+package com.danielnunesro.ensino.config;
+
+public class RabbitMQConfiguration {
+
+}

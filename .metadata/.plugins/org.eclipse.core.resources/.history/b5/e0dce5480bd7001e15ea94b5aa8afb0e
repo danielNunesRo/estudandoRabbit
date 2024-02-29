@@ -1,0 +1,5 @@
+package com.danielnunesro.users.config;
+
+public class RabbitMQConfiguration {
+
+}

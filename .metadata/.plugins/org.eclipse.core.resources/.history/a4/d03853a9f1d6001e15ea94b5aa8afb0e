@@ -1,0 +1,5 @@
+package com.danielnunesro.ensino.dtos;
+
+public class ClienteDTO {
+
+}

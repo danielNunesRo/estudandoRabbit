@@ -1,0 +1,5 @@
+package com.danielnunesro.users.services;
+
+public class UsersService {
+
+}
